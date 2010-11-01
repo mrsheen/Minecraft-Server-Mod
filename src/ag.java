@@ -10,7 +10,7 @@ public class ag extends hr
   {
     super(paramInt1, paramInt2, jr.x, false);
     portal = new Portal("null");
-    System.out.println("ag.init" + paramInt1 + "," + paramInt2);
+    //System.out.println("ag.init" + paramInt1 + "," + paramInt2);
   }
 
   public ds d(el paramel, int paramInt1, int paramInt2, int paramInt3) {
@@ -47,7 +47,7 @@ public class ag extends hr
 
     portal = etc.getDataSource().getPortal(paramInt1,paramInt2,paramInt3);
     if (portal == null) {
-        System.out.println("No portal at: "+paramInt1+","+paramInt2+","+paramInt3+" found, making new one");
+        //System.out.println("No portal at: "+paramInt1+","+paramInt2+","+paramInt3+" found, making new one");
         portal = new Portal(paramInt1+","+paramInt2+","+paramInt3);
         etc.getDataSource().addPortal(portal);
        }

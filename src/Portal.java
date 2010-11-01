@@ -46,7 +46,7 @@ public class Portal {
     }
     
     public void setActive(boolean active) {
-        System.out.println("portal "+this.Label+" activated");
+        //System.out.println("portal "+this.Label+" activated");
         this.active = active;
     }
     
@@ -79,8 +79,11 @@ public class Portal {
         }
         // check if we have removed all, if so, portal is deactivated
         if (activeCurtainBlocks <= 1) {
-            System.out.println("portal "+this.Label+" deactivated");
-            this.active = false;
+            //System.out.println("portal "+this.Label+" deactivated");
+            if (!(Boolean)etc.getLoader().callHook(PluginLoader.Hook.PORTALDESTROY, new Object[] {this})) {
+                this.active = false;
+                
+            }
         }
     }
     

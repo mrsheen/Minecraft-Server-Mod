@@ -148,10 +148,10 @@ public class eo extends ft {
 			if (!(Boolean)etc.getLoader().callHook(PluginLoader.Hook.PORTALWARP, new Object[] { this, etc.getDataSource().getPortal((int)this.p,(int)this.q,(int)this.r)}))
 			{
 				//this.bm.k(); // Lets MOVE!
-				player.sendMessage("You're in a portal!");
-                player.sendMessage("Location: "+this.p+","+this.q+","+this.r);
-                Block block = etc.getServer().getBlockAt((int)Math.floor(this.p), (int)Math.floor(this.q), (int)Math.floor(this.r));
-                System.out.println("blocktype: "+block.getType());
+				//player.sendMessage("You're in a portal!");
+                //player.sendMessage("Location: "+this.p+","+this.q+","+this.r);
+                //Block block = etc.getServer().getBlockAt((int)Math.floor(this.p), (int)Math.floor(this.q), (int)Math.floor(this.r));
+                //System.out.println("blocktype: "+block.getType());
 			}
 			
 		  }
