@@ -145,7 +145,7 @@ public class eo extends ft {
 			this.portalTicks = 1.0F;
 			this.portalCount = 10;
 			//this.bm.A.a("portal.travel", 1.0F, this.aV.nextFloat() * 0.4F + 0.8F); // Play that funky music ri-iiiight
-			if (!(Boolean)etc.getLoader().callHook(PluginLoader.Hook.PORTALWARP, new Object[] { this, etc.getDataSource().getPortal((int)this.p,(int)this.q,(int)this.r)}))
+			if (!(Boolean)etc.getLoader().callHook(PluginLoader.Hook.PORTALWARP, new Object[] { this, etc.getDataSource().getPortal((int)Math.floor(this.p),(int)Math.floor(this.q),(int)Math.floor(this.r))}))
 			{
 				//this.bm.k(); // Lets MOVE!
 				//player.sendMessage("You're in a portal!");
