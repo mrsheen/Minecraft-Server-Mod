@@ -200,12 +200,12 @@ public class iy
 
     if (distance >= (mapLimit+1)) // hard limit
 	{
-		System.out.println("Generating void chunk (" + Integer.toString(big1) + ","+ Integer.toString(big2)+") - "+Integer.toString(distance));
+		//System.out.println("Generating void chunk (" + Integer.toString(big1) + ","+ Integer.toString(big2)+") - "+Integer.toString(distance));
 		arrayOfByte = new byte[32768];
 	}
 	else if (distance >= (mapLimit-15) && distance <= (mapLimit)) // soft limit
 	{
-		System.out.println("Generating border chunk (" + Integer.toString(big1) + ","+ Integer.toString(big2)+") - "+Integer.toString(distance));
+		//System.out.println("Generating border chunk (" + Integer.toString(big1) + ","+ Integer.toString(big2)+") - "+Integer.toString(distance));
 		for(int k1 = 0; k1 < 32768; k1++) {
 			arrayOfByte[k1] = 48; // Lots of moss.
 		}
