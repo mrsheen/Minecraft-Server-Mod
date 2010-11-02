@@ -317,12 +317,28 @@ public abstract class DataSource {
     public Portal getPortal(String name) {
         synchronized (portalLock) {
             for (Portal portal : portals) {
-                if (portal.Name.equalsIgnoreCase(name) || portal.Label.equalsIgnoreCase(name)) {
+                if (portal.Name.equalsIgnoreCase(name)) {
                     return portal;
                 }
             }
         }
-        return new Portal(name);
+        return null;
+    }
+    
+    /**
+     * Returns specified portal
+     * @param ID
+     * @return portal
+     */
+    public Portal getPortal(int ID) {
+        synchronized (portalLock) {
+            for (Portal portal : portals) {
+                if (portal.ID == ID) {
+                    return portal;
+                }
+            }
+        }
+        return null;
     }
     
     /**
@@ -339,6 +355,25 @@ public abstract class DataSource {
             }
         }
         return null;
+    }
+    
+    /**
+     * Returns a string containing all portal names
+     * @return string list of portal
+     */
+    public String getPortalNames() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(""); //incaseofnull
+
+        synchronized (portalLock) {
+            for (Portal portal : portals) {
+                if (!portal.Name.equalsIgnoreCase("null")) {
+                    builder.append(portal.Name).append(" ");
+                }
+            }
+        }
+
+        return builder.toString();
     }
 
     /**

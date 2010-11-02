@@ -21,23 +21,21 @@ public class Portal {
     /**
      * Portal group
      */
-    public String Name, Group, Label;
+    public String Name, Group;
     /**
      * Portal's location
      */
     public Location loc1, loc2;
     
     public Portal(String name){
-        // By default, the portal name is the string containing the x,y,z location
-        // of the block clicked to create it
+        // By default, the portal name is 'Unnamed'
         // It is advisable to use getPortal(x,y,z) unless a name is explicitly set
         // by a plugin
+        // Portal.ID is a unique identifier
         this.Name = name;
-        this.Label = name;
         
         Location nullBlock = new Location(0,128,0);
         loc1 = loc2 = nullBlock;
-        
         
     }
     
@@ -52,11 +50,6 @@ public class Portal {
     
     public void setName(String name) {
         this.Name = name;
-        etc.getDataSource().changePortal(this);
-    }
-    
-    public void setLabel(String label) {
-        this.Label = label;
         etc.getDataSource().changePortal(this);
     }
     
@@ -108,7 +101,7 @@ public class Portal {
     }
     
     public boolean containsLoc(int x, int y, int z) {
-        // Check if this location is one of our curtain pieces
+        // Check if this location is one of our curtain floor pieces (bottom left, bottom right)
         if (x == (int)Math.floor(loc1.x) && y == (int)Math.floor(loc1.y) && z == (int)Math.floor(loc1.z)) {
             return true;
         }

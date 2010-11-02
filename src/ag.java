@@ -48,16 +48,10 @@ public class ag extends hr
     portal = etc.getDataSource().getPortal(paramInt1,paramInt2,paramInt3);
     if (portal == null) {
         //System.out.println("No portal at: "+paramInt1+","+paramInt2+","+paramInt3+" found, making new one");
-        portal = new Portal(paramInt1+","+paramInt2+","+paramInt3);
+        portal = new Portal("Unnamed");
         etc.getDataSource().addPortal(portal);
        }
-    
-	
-	if ((Boolean)etc.getLoader().callHook(PluginLoader.Hook.PORTALCREATE, new Object[] {portal}))
-	{
-		return false; // Portal creation interrupted
-	}
-	
+    	
 	portal.setActive(true);
     
 
@@ -93,7 +87,11 @@ public class ag extends hr
     paramel.i = false;
 
     etc.getDataSource().changePortal(portal);
-    
+    if ((Boolean)etc.getLoader().callHook(PluginLoader.Hook.PORTALCREATE, new Object[] {portal}))
+	{
+        //!TODO!Remove portal
+		return false; // Portal creation interrupted
+	}
     
     return true;
   }

@@ -321,26 +321,27 @@ public class FlatFileSource extends DataSource {
                             continue;
                         }
                         String[] split = line.split(":");
-                        if (split.length < 4) {
+                        if (split.length < 5) {
                             continue;
                         }
 
                         Location loc1 = new Location();
-                        loc1.x = Double.parseDouble(split[1]);
-                        loc1.y = Double.parseDouble(split[2]);
-                        loc1.z = Double.parseDouble(split[3]);
+                        loc1.x = Double.parseDouble(split[2]);
+                        loc1.y = Double.parseDouble(split[3]);
+                        loc1.z = Double.parseDouble(split[4]);
                         
                         Location loc2 = new Location();
-                        loc2.x = Double.parseDouble(split[4]);
-                        loc2.y = Double.parseDouble(split[5]);
-                        loc2.z = Double.parseDouble(split[6]);
+                        loc2.x = Double.parseDouble(split[5]);
+                        loc2.y = Double.parseDouble(split[6]);
+                        loc2.z = Double.parseDouble(split[7]);
                         
-                        Portal portal = new Portal(split[0]);
+                        Portal portal = new Portal(split[1]);
                         //!TODO! Add label if given
                         portal.loc1 = loc1;
                         portal.loc2 = loc2;
-                        if (split.length >= 8) {
-                            portal.Group = split[7];
+                        portal.ID = Integer.parseInt(line.split(":")[0]);
+                        if (split.length >= 9) {
+                            portal.Group = split[8];
                         } else {
                             portal.Group = "";
                         }
@@ -991,10 +992,13 @@ public class FlatFileSource extends DataSource {
 
     //Portals
     public void addPortal(Portal portal) {
+        portal.ID = portals.size();
         String portalLoc = etc.getInstance().getPortalLocation();
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(portalLoc, true));
             StringBuilder builder = new StringBuilder();
+            builder.append(portal.ID);
+            builder.append(":");
             builder.append(portal.Name);
             builder.append(":");
             builder.append(portal.loc1.x);
@@ -1025,7 +1029,7 @@ public class FlatFileSource extends DataSource {
         synchronized (portalLock) {
             Portal toRem = null;
             for (Portal h : portals) {
-                if (h.Name.equalsIgnoreCase(portal.Name)) {
+                if (h.ID == portal.ID) {
                     toRem = h;
                 }
             }
@@ -1042,10 +1046,12 @@ public class FlatFileSource extends DataSource {
             StringBuilder toWrite = new StringBuilder();
             String line = "";
             while ((line = reader.readLine()) != null) {
-                if (!line.split(":")[0].equalsIgnoreCase(portal.Name)) {
+                if (Integer.parseInt(line.split(":")[0]) != portal.ID) {
                     toWrite.append(line).append("\r\n");
                 } else {
                     StringBuilder builder = new StringBuilder();
+                    builder.append(portal.ID);
+                    builder.append(":");
                     builder.append(portal.Name);
                     builder.append(":");
                     builder.append(portal.loc1.x);
@@ -1090,7 +1096,7 @@ public class FlatFileSource extends DataSource {
             StringBuilder toWrite = new StringBuilder();
             String line = "";
             while ((line = reader.readLine()) != null) {
-                if (!line.split(":")[0].equalsIgnoreCase(portal.Name)) {
+                if (Integer.parseInt(line.split(":")[0]) != portal.ID) {
                     toWrite.append(line).append("\r\n");
                 }
             }
