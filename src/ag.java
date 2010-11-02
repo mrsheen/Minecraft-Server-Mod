@@ -101,9 +101,7 @@ public class ag extends hr
     int i = 0;
     int j = 1;
 	portal = etc.getDataSource().getPortalByCurtain(paramInt1, paramInt2, paramInt3);
-	if (portal == null) {
-		return;
-	}
+	
 	//System.out.println("portal check at: " + paramInt1 + "," + paramInt2 + "," + paramInt3 + " : " + paramInt4);
     if ((paramel.a(paramInt1 - 1, paramInt2, paramInt3) == this.bi) || (paramel.a(paramInt1 + 1, paramInt2, paramInt3) == this.bi)) {
       i = 1;
@@ -115,7 +113,7 @@ public class ag extends hr
       k--;
     }
     if (paramel.a(paramInt1, k - 1, paramInt3) != fw.aq.bi) {
-      portal.collapseCurtain(paramInt1, paramInt2, paramInt3);
+      if (portal != null) portal.collapseCurtain(paramInt1, paramInt2, paramInt3);
       paramel.d(paramInt1, paramInt2, paramInt3, 0);
       return;
     }
@@ -125,7 +123,7 @@ public class ag extends hr
       m++;
     }
     if ((m != 3) || (paramel.a(paramInt1, k + m, paramInt3) != fw.aq.bi)) {
-      portal.collapseCurtain(paramInt1, paramInt2, paramInt3);
+      if (portal != null) portal.collapseCurtain(paramInt1, paramInt2, paramInt3);
       paramel.d(paramInt1, paramInt2, paramInt3, 0);
       return;
     }
@@ -133,14 +131,14 @@ public class ag extends hr
     int n = (paramel.a(paramInt1 - 1, paramInt2, paramInt3) == this.bi) || (paramel.a(paramInt1 + 1, paramInt2, paramInt3) == this.bi) ? 1 : 0;
     int i1 = (paramel.a(paramInt1, paramInt2, paramInt3 - 1) == this.bi) || (paramel.a(paramInt1, paramInt2, paramInt3 + 1) == this.bi) ? 1 : 0;
     if ((n != 0) && (i1 != 0)) {
-      portal.collapseCurtain(paramInt1, paramInt2, paramInt3);
+      if (portal != null) portal.collapseCurtain(paramInt1, paramInt2, paramInt3);
       paramel.d(paramInt1, paramInt2, paramInt3, 0);
       return;
     }
 
     if (((paramel.a(paramInt1 + i, paramInt2, paramInt3 + j) != fw.aq.bi) || (paramel.a(paramInt1 - i, paramInt2, paramInt3 - j) != this.bi)) && ((paramel.a(paramInt1 - i, paramInt2, paramInt3 - j) != fw.aq.bi) || (paramel.a(paramInt1 + i, paramInt2, paramInt3 + j) != this.bi)))
     {
-      portal.collapseCurtain(paramInt1, paramInt2, paramInt3);
+      if (portal != null) portal.collapseCurtain(paramInt1, paramInt2, paramInt3);
       paramel.d(paramInt1, paramInt2, paramInt3, 0);
       return;
     }

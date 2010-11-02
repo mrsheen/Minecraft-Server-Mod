@@ -61,11 +61,9 @@ public class Portal {
             pt2 = curtainBlocks.get(i*3+1);
             pt3 = curtainBlocks.get(i*3+2);
             if (x == pt1 && y == pt2 && z == pt3) {
-                 curtainBlocks.remove(i*3+2);
-                 curtainBlocks.remove(i*3+1);
-                 curtainBlocks.remove(i*3);
-                //System.out.println("block removed");
-                activeCurtainBlocks--;
+				// Found a valid block in curtain, trigger a full collapse
+				curtainBlocks.clear();                
+                activeCurtainBlocks = 0;
                 break;
             }
         }
@@ -78,13 +76,6 @@ public class Portal {
                 
             }
         }
-		else if (activeCurtainBlocks == 1 && this.active) {
-			if (etc.getServer().getBlockAt(curtainBlocks.get(0),curtainBlocks.get(1),curtainBlocks.get(2)).getType() != fw.ag.bi) {
-				// What should be a curtain is air (possibly degrief stick
-				collapseCurtain(curtainBlocks.get(0),curtainBlocks.get(1),curtainBlocks.get(2));
-				return;
-			}
-		}
     }
     
     public void addCurtain(int x, int y, int z) {
