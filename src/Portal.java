@@ -119,7 +119,7 @@ public class Portal {
 		for (int k = 0; k < 2; k++) {
 		  for (int m = 0; m < 3; m++) {
 			addCurtain(x1 + i * k, y1 + m, z1 + j * k); // Set 6 blocks to purple		
-			System.out.println((x1 + i * k)+","+ (y1 + m)+","+ (z1 + j * k));
+			//System.out.println((x1 + i * k)+","+ (y1 + m)+","+ (z1 + j * k));
 		  }
 		}
 		
