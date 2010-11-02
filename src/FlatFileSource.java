@@ -22,7 +22,7 @@ public class FlatFileSource extends DataSource {
         loadWarps();
         loadPortals();
         loadItems();
-        //loadBanList();
+        loadBanList();
 
         String location = etc.getInstance().getUsersLocation();
         if (!new File(location).exists()) {
@@ -345,6 +345,10 @@ public class FlatFileSource extends DataSource {
                         } else {
                             portal.Group = "";
                         }
+						
+						// Build curtain from logic
+						portal.buildCurtain();
+						
                         portals.add(portal);
                     }
                     scanner.close();

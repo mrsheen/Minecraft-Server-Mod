@@ -356,6 +356,22 @@ public abstract class DataSource {
         }
         return null;
     }
+	
+	/**
+     * Returns specified portal
+     * @param intX, intY, intZ
+     * @return portal
+     */
+    public Portal getPortalByCurtain(int x, int y, int z) {
+        synchronized (portalLock) {
+            for (Portal portal : portals) {
+                if (portal.containsCurtain(x,y,z)) { 
+                    return portal;
+                }
+            }
+        }
+        return null;
+    }
     
     /**
      * Returns a string containing all portal names

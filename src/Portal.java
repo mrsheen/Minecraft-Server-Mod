@@ -36,7 +36,6 @@ public class Portal {
         
         Location nullBlock = new Location(0,128,0);
         loc1 = loc2 = nullBlock;
-        
     }
     
     public boolean getActive() {
@@ -71,7 +70,7 @@ public class Portal {
             }
         }
         // check if we have removed all, if so, portal is deactivated
-        if (activeCurtainBlocks <= 1 && this.active) {
+        if (activeCurtainBlocks == 0 && this.active) {
             //System.out.println("portal "+this.Label+" deactivated");
             if (!(Boolean)etc.getLoader().callHook(PluginLoader.Hook.PORTALDESTROY, new Object[] {this})) {
                 etc.getDataSource().removePortal(this);
@@ -79,6 +78,13 @@ public class Portal {
                 
             }
         }
+		else if (activeCurtainBlocks == 1 && this.active) {
+			if (etc.getServer().getBlockAt(curtainBlocks.get(0),curtainBlocks.get(1),curtainBlocks.get(2)).getType() != fw.ag.bi) {
+				// What should be a curtain is air (possibly degrief stick
+				collapseCurtain(curtainBlocks.get(0),curtainBlocks.get(1),curtainBlocks.get(2));
+				return;
+			}
+		}
     }
     
     public void addCurtain(int x, int y, int z) {
@@ -100,6 +106,34 @@ public class Portal {
         }
         
     }
+	
+	 public void buildCurtain() {
+        
+		int i = 0;
+		int j = 0;
+		
+		int x1 = (int)Math.floor(this.loc1.x);
+		int y1 = (int)Math.floor(this.loc1.y);
+		int z1 = (int)Math.floor(this.loc1.z);
+		
+		int x2 = (int)Math.floor(this.loc2.x);
+		int y2 = (int)Math.floor(this.loc2.y);
+		int z2 = (int)Math.floor(this.loc2.z);
+		
+		if (x1 == x2) j = 1;
+		if (z1 == z2) i = 1;
+
+		if (i == j) return;
+		//System.out.println(x1+","+ y1+","+ z1);
+		for (int k = 0; k < 2; k++) {
+		  for (int m = 0; m < 3; m++) {
+			addCurtain(x1 + i * k, y1 + m, z1 + j * k); // Set 6 blocks to purple		
+			System.out.println((x1 + i * k)+","+ (y1 + m)+","+ (z1 + j * k));
+		  }
+		}
+		
+		this.active = true;
+    }
     
     public boolean containsLoc(int x, int y, int z) {
         // Check if this location is one of our curtain floor pieces (bottom left, bottom right)
@@ -108,6 +142,21 @@ public class Portal {
         }
         else if (x == (int)Math.floor(loc2.x) && y == (int)Math.floor(loc2.y) && z == (int)Math.floor(loc2.z)) {
             return true;
+        }
+        //System.out.println("no portal found at: "+x+","+y+","+z);
+        return false;
+    }
+	
+	 public boolean containsCurtain(int x, int y, int z) {
+        // Check if this location is one of our curtain pieces 
+		int pt1, pt2, pt3;
+		for (int i=0; i<(curtainBlocks.size()/3);i++) {
+            pt1 = curtainBlocks.get(i*3);
+            pt2 = curtainBlocks.get(i*3+1);
+            pt3 = curtainBlocks.get(i*3+2);
+            if (x == pt1 && y == pt2 && z == pt3) {
+                return true;
+            }
         }
         //System.out.println("no portal found at: "+x+","+y+","+z);
         return false;

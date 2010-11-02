@@ -87,18 +87,23 @@ public class ag extends hr
     paramel.i = false;
 
     etc.getDataSource().changePortal(portal);
+	
     if ((Boolean)etc.getLoader().callHook(PluginLoader.Hook.PORTALCREATE, new Object[] {portal}))
 	{
         //!TODO!Remove portal
-		return false; // Portal creation interrupted
+		//return false; // Portal creation interrupted
 	}
-    
+    portal = new Portal("null");
     return true;
   }
 
   public void b(el paramel, int paramInt1, int paramInt2, int paramInt3, int paramInt4) {
     int i = 0;
     int j = 1;
+	portal = etc.getDataSource().getPortalByCurtain(paramInt1, paramInt2, paramInt3);
+	if (portal == null) {
+		return;
+	}
 	//System.out.println("portal check at: " + paramInt1 + "," + paramInt2 + "," + paramInt3 + " : " + paramInt4);
     if ((paramel.a(paramInt1 - 1, paramInt2, paramInt3) == this.bi) || (paramel.a(paramInt1 + 1, paramInt2, paramInt3) == this.bi)) {
       i = 1;
