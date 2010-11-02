@@ -349,7 +349,7 @@ public abstract class DataSource {
     public Portal getPortal(int x, int y, int z) {
         synchronized (portalLock) {
             for (Portal portal : portals) {
-                if (portal.containsLoc(x,y,z)) {
+                if (portal.containsLoc(x,y,z) || portal.containsLoc(x,y-1,z)) { // If you creep to teh edge, you can be in a portal but above teh curtain block
                     return portal;
                 }
             }
