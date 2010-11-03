@@ -800,4 +800,21 @@ public class MySQLSource extends DataSource {
     public void modifyBan(Ban ban) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+    
+    public void addPortal(Portal portal) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    public void changePortal(Portal portal) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    public void removePortal(Portal portal) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    
+    public void loadPortals() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }
