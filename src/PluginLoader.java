@@ -106,6 +106,10 @@ public class PluginLoader {
          * Calls onPortalDestroy
          */
 		PORTALDESTROY,
+		/**
+         * Calls onBlockBreak
+         */
+		BLOCK_BROKEN,
         /**
          * Unused.
          */
@@ -403,6 +407,11 @@ public class PluginLoader {
                                 break;
 							case PORTALDESTROY:
                                 if (listener.onPortalDestroy((Portal) parameters[0])) {
+                                    toRet = true;
+                                }
+                                break;
+                            case BLOCK_BROKEN:
+                                if (listener.onBlockBreak(((eo) parameters[0]).getPlayer(), (Block) parameters[1])) {
                                     toRet = true;
                                 }
                                 break;
